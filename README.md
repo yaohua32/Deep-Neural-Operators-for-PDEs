@@ -40,6 +40,10 @@ Goal: Learn the mapping from in-flow velocity ${\bf u}_0 = (a(x), 0)$ to the pre
 
 We also consider the inverse problem of reconstructing the **piecewise-constant** permeability field $a(x)$ from **sparse, noisy** obserations of $u$. This problem has important applications in subsurface modeling and medical imaging.
 
+## 🔗 Data Availability
+- **All Physics-aware DNOs** in this repository are trained exclusively using physics information (i.e., **without labeled (a, u) pairs**).
+- Training data (only for data-driven DNOs) and testing data can be downloaded from **[Google Drive](https://drive.google.com/drive/folders/1MOFme5DgUd339rlL1IGq35ZcVCR0CWqa?usp=drive_link)**.
+
 ## 🔬 Future Work
 
 This repository is an ongoing project, and more DNO frameworks and PDE applications will be added. We welcome contributions and collaborations!
