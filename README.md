@@ -2,17 +2,8 @@
 This repository implements several deep neural operator (DNO) frameworks for solving parametric partial differential equations (PDEs) and related inverse problems. These methods aim to learn an operator $\mathcal{G}$ that maps input parameters (e.g., coefficients, boundary/initial conditions) to the corresponding PDE solutions.
 
 #### 🎯 Problem Formulation
-Given a parametric PDE:
-$$
-\begin{cases}
-\mathcal{N}[u; a] &= 0 \\
-\mathcal{B}[u; a] & =0
-\end{cases} \tag{1}
-$$
-where $\mathcal{N}$ represents the PDE, $\mathcal{B}$ represents the boundary/initial conditions, $a$ denotes the input function (e.g., coefficients or boundary/initial conditions), $u$ is the corresponding PDE solution. The goal of deep neural operators is to approximate the mapping:
-$$
-\mathcal{G}: a \in \mathcal{A} \rightarrow u \in \mathcal{U}. \tag{2}
-$$
+Given a parametric PDE $\mathcal{N}[u;a]=0$,
+where $\mathcal{N}$ represents the PDE, $a$ denotes the input function (e.g., coefficients or boundary/initial conditions), $u$ is the corresponding PDE solution. The goal of deep neural operators is to approximate the mapping: $\mathcal{G}: a \in \mathcal{A} \rightarrow u \in \mathcal{U}$.
 
 ## 🏆 Implemented Deep Neural Operator Frameworks
 DNO methods can be categorized into **data-driven** and **physics-aware** approaches based on whether they incorporate physics constraints during training.
@@ -30,39 +21,20 @@ These methods incorporate physics constraints (i.e., PDE residuals) into the tra
   - **[Deep Generative Neural Operator (DGNO)](https://arxiv.org/abs/2502.06250):** A novel framework leveraging **deep generative modeling** and **probabilistic latent variables** to handle complex physics-based problems, including inverse problems. DGNO offers several key advantages:
     -  Enable to **learn purely from physics constraints**.
 	- Effectively solves parametric PDEs and inverse problems with **discontinuous inputs**.
-	- Provides probabilistic estimates and **robust performance with sparse, noisy data** in solving inverse problems.
+	- Provides probabilistic estimates and **robust performance with sparse, noisy data** in solving **inverse problems**.
 	- Uses **weak-form PDE residuals** based on compactly supported radial basis functions (CSRBFs), reducing regularity constraints.
 
 ## 📌 Benchmark Problems
 We evaluate the DNO frameworks on the following PDEs:
 ### 1. Burger’s Equation
-$$
-\begin{split}
-u_t + uu_x &= \nu u_{xx}, \quad x \in (0,1),\ t \in(0,1] \\
-u(x-\pi, t) &= u(x+\pi, t),\quad t \in(0,1] \\
-u(x,t=0) &= a(x)
-\end{split} \tag{3}
-$$
-Goal: Learn the operator mapping initial condition $a(x)$ to the solution $u(x,t)$.
+Goal: Learn the operator mapping initial condition $a(x):=u(x,t=0)$ to the solution $u(x,t)$.
 
 ### 2. Darcy’s Flow
-$$
-\begin{split}
-- \nabla( a \nabla u) &= f, \quad x \in \Omega = [0,1]^2 \\
-u &= 0
-\end{split} \tag{4}
-$$
 Goal: Learn the mapping from permeability field $a(x)$ to the pressure field $u(x)$.
 We considered two cases: (1) Smooth $a(x)$ and (2) Piecewise-constant $a(x)$.
 
 ### 3. Stokes Flow with a Cylindrical Obstacle
-$$
-\begin{split}
--\mu\nabla^2{\bf u} + \nabla p &= {\bf f}, \quad x \in \Omega \\
-\nabla\cdot {\bf u} &= 0,\quad x \in \Omega
-\end{split} \tag{5}
-$$
-where ${\bf u}$ is velocity, $p$ is pressure, and $\mu$ is viscosity. Goal: Learn the mapping from in-flow velocity ${\bf u}_0 = (a(x), 0)$ to the pressure field $u(x)$.
+Goal: Learn the mapping from in-flow velocity ${\bf u}_0 = (a(x), 0)$ to the pressure field $u(x)$.
 
 ### 4. Inverse Coefficient Problem in Darcy’s Flow
 
