@@ -15,9 +15,9 @@ These methods learn the operator solely from labeled training pairs $(a,u)$.
 
 ### 2. Physics-Aware DNOs (Self-Supervised Learning)
 These methods incorporate physics constraints (i.e., PDE residuals) into the training process, reducing data requirements and improving accuracy and generalization.
-  - **[PI-DeepONet](https://arxiv.org/abs/2103.10974):** Extends DeepONet by adding PDE residuals as training constraints. However, it requires computing high-order derivatives, making it unsuitable for singular or discontinuous functions.
-  - **[PINO](https://arxiv.org/abs/2111.03794):** A physics-informed extension of FNO that leverages PDE residuals but struggles with complex geometries and high-dimensional problems due to its reliance on regular, fine meshs for Fourier transformations.
-  - **[PI-MultiONet](https://arxiv.org/abs/2502.06250):** A physics-informed version of MultiONet, improving accuracy while reducing labeled data requirements.
+  - **[PI-DeepONet](https://arxiv.org/abs/2103.10974):** Extends DeepONet by adding PDE residuals as training constraints. However, it requires higher regularity of inputs/outputs, making it unsuitable for singular or discontinuous inputs/outputs.
+  - **[PINO](https://arxiv.org/abs/2111.03794):** A physics-informed extension of FNO that leverages PDE residuals but struggles with complex geometries and high-dimensional problems due to its reliance on regular, fine meshes for Fourier transformations.
+  - **[PI-MultiONet](https://arxiv.org/abs/2502.06250):** A physics-informed version of MultiONet, improving accuracy while reducing labeled data requirements. 
   - **[Deep Generative Neural Operator (DGNO)](https://arxiv.org/abs/2502.06250):** A novel framework leveraging **deep generative modeling** and **probabilistic latent variables** to handle complex physics-based problems, including inverse problems. DGNO offers several key advantages:
     -  Enable to **learn purely from physics constraints**.
 	- Effectively solves parametric PDEs and inverse problems with **discontinuous inputs**.
