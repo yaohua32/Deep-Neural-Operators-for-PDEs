@@ -36,9 +36,11 @@ We considered two cases: (1) Smooth $a(x)$ and (2) Piecewise-constant $a(x)$.
 ### 3. Stokes Flow with a Cylindrical Obstacle
 Goal: Learn the mapping from in-flow velocity ${\bf u}_0 = (a(x), 0)$ to the pressure field $u(x)$.
 
-### 4. Inverse Coefficient Problem in Darcy’s Flow
+### 4. Inverse Discontinuity Coefficient in Darcy’s Flow
 
-We also consider the inverse problem of reconstructing the **piecewise-constant** permeability field $a(x)$ from **sparse, noisy** obserations of $u$. This problem has important applications in subsurface modeling and medical imaging.
+We also consider the inverse problem of reconstructing the **piecewise-constant** permeability field $a(x)$ from **sparse, noisy** observations of $u$. This problem has important applications in subsurface modeling and medical imaging.
+
+📌 **Remark**: Due to the challenging nature of this inverse problem, the above DNO frameworks **are unable to solve it except for the Deep Generative Neural Operator (DGNO) method**. Therefore, we have only implemented DGNO for this inverse problem.
 
 ## 🔗 Data Availability
 - **All Physics-aware DNOs** in this repository are trained exclusively using physics information (i.e., **without labeled (a, u) pairs**).
