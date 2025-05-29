@@ -18,7 +18,7 @@ These methods incorporate physics constraints (i.e., PDE residuals) into the tra
   - **[PI-DeepONet](https://arxiv.org/abs/2103.10974):** Extends DeepONet by adding PDE residuals as training constraints. However, it requires higher regularity of inputs/outputs, making it unsuitable for singular or discontinuous inputs/outputs.
   - **[PINO](https://arxiv.org/abs/2111.03794):** A physics-informed extension of FNO that leverages PDE residuals but struggles with complex geometries and high-dimensional problems due to its reliance on regular, fine meshes for Fourier transformation and derivative approximation.
   - **[PI-MultiONet](https://arxiv.org/abs/2502.06250):** A physics-informed version of MultiONet, improving accuracy while reducing labeled data requirements. 
-  - **[Deep Generative Neural Operator (DGNO)](https://arxiv.org/abs/2502.06250):** A novel framework leveraging **deep generative modeling** and **probabilistic latent variables** to handle complex physics-based problems, including inverse problems. DGNO offers several key advantages:
+  - **[Deep Generative Neural Operator (DGenNO)](https://arxiv.org/abs/2502.06250):** A novel framework leveraging **deep generative modeling** and **probabilistic latent variables** to handle complex physics-based problems, including inverse problems. DGenNO offers several key advantages:
     -  Enable to **learn purely from physics constraints**.
 	- Effectively solves parametric PDEs and inverse problems with **discontinuous inputs**.
 	- Provides probabilistic estimates and **robust performance with sparse, noisy data** in solving **inverse problems**.
@@ -30,7 +30,7 @@ We evaluate the DNO frameworks on the following PDEs:
 Goal: Learn the operator mapping initial condition $a(x):=u(x,t=0)$ to the solution $u(x,t)$.
 
 ### 2. Darcy’s Flow
-Goal: Learn the mapping from permeability field $a(x)$ to the pressure field $u(x)$.
+Goal: Learn the mapping from the permeability field $a(x)$ to the pressure field $u(x)$.
 We considered two cases: (1) Smooth $a(x)$ and (2) Piecewise-constant $a(x)$.
 
 ### 3. Stokes Flow with a Cylindrical Obstacle
@@ -40,7 +40,7 @@ Goal: Learn the mapping from in-flow velocity ${\bf u}_0 = (a(x), 0)$ to the pre
 
 We also consider the inverse problem of reconstructing the **piecewise-constant** permeability field $a(x)$ from **sparse, noisy** observations of $u$. This problem has important applications in subsurface modeling and medical imaging.
 
-📌 **Remark**: Due to the challenging nature of this inverse problem, the above DNO frameworks **are unable to solve it except for the Deep Generative Neural Operator (DGNO) method**. Therefore, we have only implemented DGNO for this inverse problem.
+📌 **Remark**: Due to the challenging nature of this inverse problem, the above DNO frameworks **are unable to solve it except for the Deep Generative Neural Operator (DGenNO) method**. Therefore, we have only implemented DGenNO for this inverse problem.
 
 ## 🔗 Data Availability
 - **All Physics-aware DNOs** in this repository are trained exclusively using physics information (i.e., **without labeled (a, u) pairs**).
@@ -51,10 +51,10 @@ We also consider the inverse problem of reconstructing the **piecewise-constant*
 This repository is an ongoing project, and more DNO frameworks and PDE applications will be added. We welcome contributions and collaborations!
 
 ## 📖 Citation
-If you find this work useful or are interested in our **DGNO** or **PI-MultiONet** methods, please cite our paper:
+If you find this work useful or are interested in our **DGenNO** or **PI-MultiONet** methods, please cite our paper:
 ```
 @article{zang2025dgno,
-  title={DGNO: A Novel Physics-aware Neural Operator for Solving Forward and Inverse PDE Problems based on Deep, Generative Probabilistic Modeling},
+  title={DGenNO: A Novel Physics-aware Neural Operator for Solving Forward and Inverse PDE Problems based on Deep, Generative Probabilistic Modeling},
   author={Zang, Yaohua and Koutsourelakis, Phaedon-Stelios},
   journal={arXiv preprint arXiv:2502.06250},
   year={2025}
