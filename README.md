@@ -53,10 +53,13 @@ This repository is an ongoing project, and more DNO frameworks and PDE applicati
 ## 📖 Citation
 If you find this work useful or are interested in our **DGenNO** or **PI-MultiONet** methods, please cite our paper:
 ```
-@article{zang2025dgno,
-  title={DGenNO: A Novel Physics-aware Neural Operator for Solving Forward and Inverse PDE Problems based on Deep, Generative Probabilistic Modeling},
+@article{zang2025dgenno,
+  title={DGenNO: a novel physics-aware neural operator for solving forward and inverse PDE problems based on deep, generative probabilistic modeling},
   author={Zang, Yaohua and Koutsourelakis, Phaedon-Stelios},
-  journal={arXiv preprint arXiv:2502.06250},
-  year={2025}
+  journal={Journal of Computational Physics},
+  volume={538},
+  pages={114137},
+  year={2025},
+  publisher={Elsevier}
 }
 ```
