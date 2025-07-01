@@ -19,6 +19,7 @@ class MultiONetBatch(nn.Module):
                  activation_a='SiLU_Id', dtype=None):
         super(MultiONetBatch, self).__init__()
         self.hidden_list = hidden_list
+        self.l = len(hidden_list)
         # Activation
         if isinstance(activation_x, str):
             self.activation_x = FunActivation()(activation_x)
@@ -64,7 +65,7 @@ class MultiONetBatch(nn.Module):
             x = self.activation_x(net_x(x))
             out += torch.einsum('bnh,bh->bn', x, a_mesh) * w 
         ##### The output layer
-        out = out/len(self.net_x) + self.b
+        out = out/self.l + self.b
 
         return out.unsqueeze(-1)
 
@@ -79,6 +80,7 @@ class MultiONetBatch_X(nn.Module):
                  activation_a='SiLU_Id', dtype=None):
         super(MultiONetBatch_X, self).__init__()
         self.hidden_list = hidden_list
+        self.l = len(hidden_list)
         # Activation
         if isinstance(activation_x, str):
             self.activation_x = FunActivation()(activation_x)
@@ -121,7 +123,7 @@ class MultiONetBatch_X(nn.Module):
             x = self.activation_x(net_x(x))
             out += torch.einsum('bnh,bmh->bnm', x, a_mesh)
         ##### The output layer
-        out = self.fc_out(out/len(self.net_x))
+        out = self.fc_out(out/self.l)
 
         return out
 
@@ -134,6 +136,7 @@ class MultiONetCartesianProd(nn.Module):
                  activation_a='SiLU_Id', dtype=None):
         super(MultiONetCartesianProd, self).__init__()
         self.hidden_list = hidden_list
+        self.l = len(hidden_list)
         # Activation
         if isinstance(activation_x, str):
             self.activation_x = FunActivation()(activation_x)
@@ -178,7 +181,7 @@ class MultiONetCartesianProd(nn.Module):
             x = self.activation_x(net_x(x))
             out += torch.einsum('bh,mh->bm', a_mesh, x) * w 
         ##### The output layer
-        out = out/len(self.net_x) + self.b
+        out = out/self.l+ self.b
 
         return out.unsqueeze(-1)
 
@@ -193,6 +196,7 @@ class MultiONetCartesianProd_X(nn.Module):
                  activation_a='SiLU_Id', dtype=None):
         super(MultiONetCartesianProd_X, self).__init__()
         self.hidden_list = hidden_list
+        self.l = len(hidden_list)
         # Activation
         if isinstance(activation_x, str):
             self.activation_x = FunActivation()(activation_x)
@@ -234,6 +238,6 @@ class MultiONetCartesianProd_X(nn.Module):
             x = self.activation_x(net_x(x))
             out += torch.einsum('bmh,nh->bnm', a_mesh, x)
         ##### The output layer
-        out = self.fc_out(out/len(self.net_x))
+        out = self.fc_out(out/self.l)
 
         return out
