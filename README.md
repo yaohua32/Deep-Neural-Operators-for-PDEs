@@ -46,9 +46,14 @@ We also consider the inverse problem of reconstructing the **piecewise-constant*
 - **All Physics-aware DNOs** in this repository are trained exclusively using physics information (i.e., **without labeled (a, u) pairs**).
 - Training data (only for data-driven DNOs) and testing data can be downloaded from **[Google Drive](https://drive.google.com/drive/folders/1MOFme5DgUd339rlL1IGq35ZcVCR0CWqa?usp=drive_link)**.
 
-## 🔬 Future Work
+## 🔬 Future Work and Related Resources
 
 This repository is an ongoing project, and more DNO frameworks and PDE applications will be added. We welcome contributions and collaborations!
+
+Related resources:
+- Instructions and an implementation of the **MultiONet method** can be found at [https://github.com/yaohua32/MultiONet](https://github.com/yaohua32/MultiONet)
+- Instructions and an implementation of the **DeepONet method** can be found at [https://github.com/yaohua32/DeepONet](https://github.com/yaohua32/DeepONet)
+- Instructions and an implementation of the **FNO (Fourier Neural Operator) method** can be found at [https://github.com/yaohua32/Fourier-Neural-Operator](https://github.com/yaohua32/Fourier-Neural-Operator)
 
 ## 📖 Citation
 If you find this work useful or are interested in our **DGenNO** or **PI-MultiONet** methods, please cite our paper:
