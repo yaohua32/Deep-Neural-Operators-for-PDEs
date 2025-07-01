@@ -138,7 +138,7 @@ class Solver(Module.Solver):
 
     def getModel(self, x_in_size:int, a_in_size:int, hidden_list:list,
                  latent_size:int=None, out_size:int=1, 
-                 activation_x='ReLU', activation_a='Tanh', 
+                 activation_x='SiLU_Sin', activation_a='SiLU_Id', 
                  netType:str='MultiONetBatch', **kwrds):
         '''Get the neural network model
         '''

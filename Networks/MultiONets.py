@@ -15,8 +15,8 @@ class MultiONetBatch(nn.Module):
 
     def __init__(self, in_size_x:int, in_size_a:int,
                  hidden_list:list[int],
-                 activation_x='ReLU',
-                 activation_a='Tanh', dtype=None):
+                 activation_x='SiLU_Sin',
+                 activation_a='SiLU_Id', dtype=None):
         super(MultiONetBatch, self).__init__()
         self.hidden_list = hidden_list
         # Activation
@@ -43,11 +43,9 @@ class MultiONetBatch(nn.Module):
         self.net_a = nn.Sequential(*net_a)
         # The output layer
         self.w = torch.nn.ParameterList(
-            [torch.nn.Parameter(torch.tensor(1.0)) for _ in range(len(hidden_list))]
+            [torch.nn.Parameter(torch.tensor(0.0)) for _ in range(self.l)]
             )
-        self.b = torch.nn.ParameterList(
-            [torch.nn.Parameter(torch.tensor(0.0)) for _ in range(len(hidden_list))]
-            )
+        self.b = torch.nn.Parameter(torch.tensor(0.0, dtype=dtype))
     
     def forward(self, x, a_mesh):
         '''
@@ -61,12 +59,12 @@ class MultiONetBatch(nn.Module):
         a_mesh = self.activation_a(self.fc_a_in(a_mesh))
         #### The conv layer
         out = 0.
-        for net_x, net_a, w, b in zip(self.net_x, self.net_a, self.w, self.b):
+        for net_x, net_a, w in zip(self.net_x, self.net_a, self.w):
             a_mesh = self.activation_a(net_a(a_mesh))
             x = self.activation_x(net_x(x))
-            out += torch.einsum('bnh,bh->bn', x, a_mesh) * w + b
+            out += torch.einsum('bnh,bh->bn', x, a_mesh) * w 
         ##### The output layer
-        out = out/len(self.net_x)
+        out = out/len(self.net_x) + self.b
 
         return out.unsqueeze(-1)
 
@@ -77,8 +75,8 @@ class MultiONetBatch_X(nn.Module):
     def __init__(self, in_size_x:int, in_size_a:int,
                  latent_size:int, out_size:int,
                  hidden_list:list[int],
-                 activation_x='ReLU',
-                 activation_a='Tanh', dtype=None):
+                 activation_x='SiLU_Sin',
+                 activation_a='SiLU_Id', dtype=None):
         super(MultiONetBatch_X, self).__init__()
         self.hidden_list = hidden_list
         # Activation
@@ -132,8 +130,8 @@ class MultiONetCartesianProd(nn.Module):
 
     def __init__(self, in_size_x:int, in_size_a:int, 
                  hidden_list:list[int],
-                 activation_x='ReLU',
-                 activation_a='Tanh', dtype=None):
+                 activation_x='SiLU_Sin',
+                 activation_a='SiLU_Id', dtype=None):
         super(MultiONetCartesianProd, self).__init__()
         self.hidden_list = hidden_list
         # Activation
@@ -160,11 +158,9 @@ class MultiONetCartesianProd(nn.Module):
         self.net_a = nn.Sequential(*net_a)
         # The output layer 
         self.w = torch.nn.ParameterList(
-            [torch.nn.Parameter(torch.tensor(1.0)) for _ in range(len(hidden_list))]
+            [torch.nn.Parameter(torch.tensor(0.0)) for _ in range(self.l)]
             )
-        self.b = torch.nn.ParameterList(
-            [torch.nn.Parameter(torch.tensor(0.0)) for _ in range(len(hidden_list))]
-            )
+        self.b = torch.nn.Parameter(torch.tensor(0.0, dtype=dtype))
     
     def forward(self, x, a_mesh):
         '''
@@ -177,12 +173,12 @@ class MultiONetCartesianProd(nn.Module):
         a_mesh = self.activation_a(self.fc_a_in(a_mesh))
         #### The conv layer
         out = 0.
-        for net_x, net_a, w, b in zip(self.net_x, self.net_a, self.w, self.b):
+        for net_x, net_a, w in zip(self.net_x, self.net_a, self.w):
             a_mesh = self.activation_a(net_a(a_mesh))
             x = self.activation_x(net_x(x))
-            out += torch.einsum('bh,mh->bm', a_mesh, x) * w + b
+            out += torch.einsum('bh,mh->bm', a_mesh, x) * w 
         ##### The output layer
-        out = out/len(self.net_x)
+        out = out/len(self.net_x) + self.b
 
         return out.unsqueeze(-1)
 
@@ -193,8 +189,8 @@ class MultiONetCartesianProd_X(nn.Module):
     def __init__(self, in_size_x:int, in_size_a:int, 
                  latent_size:int, out_size:int,
                  hidden_list:list[int],
-                 activation_x='ReLU',
-                 activation_a='Tanh', dtype=None):
+                 activation_x='SiLU_Sin',
+                 activation_a='SiLU_Id', dtype=None):
         super(MultiONetCartesianProd_X, self).__init__()
         self.hidden_list = hidden_list
         # Activation

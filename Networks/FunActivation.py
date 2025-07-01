@@ -6,6 +6,7 @@
 #  */
 import torch.nn as nn
 import torch
+import math
 
 class Sinc(nn.Module):
 
@@ -27,13 +28,33 @@ class Tanh_Sin(nn.Module):
 
     def __init__(self):
         super(Tanh_Sin, self).__init__()
+        self.main_act = nn.Tanh()
 
-    def fun_sin(self, x):
-        ''' '''
-        return torch.sin(torch.pi * (x+1.))
-    
     def forward(self, x):
-        return nn.functional.tanh(self.fun_sin(x)) + x
+        x1 = torch.sin(math.pi * (x+1.))
+
+        return self.main_act(x1) + x
+
+class SiLU_Sin(nn.Module):
+
+    def __init__(self):
+        super(SiLU_Sin, self).__init__()
+        self.main_act = nn.SiLU()
+
+    def forward(self, x):
+        x1 = torch.sin(math.pi * (x+1.))
+
+        return self.main_act(x1) + x
+
+class SiLU_Id(nn.Module):
+
+    def __init__(self):
+        super(SiLU_Id, self).__init__()
+        self.main_act = nn.SiLU()
+
+    def forward(self, x):
+
+        return self.main_act(x) + x
 
 class FunActivation:
 
@@ -49,6 +70,8 @@ class FunActivation:
             'Swish': Swish(),
             'Sinc': Sinc(),
             'Tanh_Sin': Tanh_Sin(),
+            'SiLU_Sin': SiLU_Sin(),
+            'SiLU_Id': SiLU_Id(),
             }
     
     def __call__(self, type=str):
